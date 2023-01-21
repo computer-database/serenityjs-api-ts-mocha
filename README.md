@@ -1,1 +1,1 @@
-# serenityjs-api-ts-mocha
+# `Serenity/JS` + `Rest API`
