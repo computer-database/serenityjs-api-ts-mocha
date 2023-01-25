@@ -1,15 +1,15 @@
-import { Ensure, equals, startsWith } from "@serenity-js/assertions";
+import { Ensure, equals } from "@serenity-js/assertions";
 import { Task } from "@serenity-js/core";
 import { LastResponse, PostRequest, Send } from "@serenity-js/rest";
+import { Computer } from "../models/computer";
 
-export const AddComputer = (expression: string) =>
+export const AddComputer = (computer: Computer) =>
   Task.where(
-    `#actor adds a computers with name ${expression}`,
+    `#actor adds a computers with name ${computer}`,
     Send.a(
-      PostRequest.to("/computers").with(`name=${expression}&introduced=&discontinued=&company=`)
-      //.using({ params: { name: `${expression}`, introduced:'', discontinued: '', company:'' } })
-      //.with("name=garuda&introduced=&discontinued=&company=").using({headers: { Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8'}})
+      PostRequest.to("/computers").with(
+        `name=${computer.name}&introduced=${computer.introduced}&discontinued=${computer.discontinued}&company=${computer.company}`
+      )
     ),
     Ensure.that(LastResponse.status(), equals(200))
   );
-//{name:'testABC',introduced:'',discontinued:'',company:''}

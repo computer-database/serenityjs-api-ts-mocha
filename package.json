@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/computer-database/serenityjs-api-ts-mocha#readme",
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@serenity-js/assertions": "^2.33.10",
     "@serenity-js/console-reporter": "^2.33.10",
     "@serenity-js/core": "^2.33.10",
