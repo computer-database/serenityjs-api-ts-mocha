@@ -1,6 +1,7 @@
 import { Ensure, equals, startsWith } from "@serenity-js/assertions";
 import { Task } from "@serenity-js/core";
 import { LastResponse, GetRequest, Send } from "@serenity-js/rest";
+import { Pagination } from "../models/pagination";
 
 export const ListOfComputers = () =>
   Task.where(
@@ -15,6 +16,17 @@ export const ListOfComputersInPage = (page) =>
     Send.a(
       GetRequest.to("/computers").using({
         params: { p: page, n: 10, s: "name", d: "asc" },
+      })
+    ),
+    Ensure.that(LastResponse.status(), equals(200))
+  );
+
+export const ListOfComputersBy = (pagination: Pagination) =>
+  Task.where(
+    `#actor lists the computers on page`,
+    Send.a(
+      GetRequest.to("/computers").using({
+        params: pagination,
       })
     ),
     Ensure.that(LastResponse.status(), equals(200))
